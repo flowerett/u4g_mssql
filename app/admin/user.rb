@@ -1,13 +1,14 @@
-ActiveAdmin.register Cause do
+ActiveAdmin.register User do
   config.filters = false
   scope :all
   actions :all, :except => [:create, :new, :edit, :update, :destroy]
 
   index do
     column :ID
-    column :UrlName
-    column :Name
-
+    column :UID
+    column :FirstName
+    column :LastName
+    column :Email
     default_actions
   end
 end
