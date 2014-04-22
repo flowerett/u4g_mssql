@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'csv'
 
-module Reports
+module Dump
   class CauseDump
     attr_reader :filename, :error_messages
 
@@ -119,7 +119,7 @@ module Reports
     end
 
     def set_filename
-      @directory_name = "tmp/causes"
+      @directory_name = "tmp/dump"
       @filename = @directory_name + "/causes_dump.csv"
     end
 

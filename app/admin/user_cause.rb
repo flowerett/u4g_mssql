@@ -1,5 +1,6 @@
-ActiveAdmin.register MigrationHistory do
+ActiveAdmin.register UserCause do
   config.filters = false
-  scope :all
+  scope :all, default: true
   actions :all, :except => [:create, :new, :edit, :update, :destroy]
+  config.sort_order = "ID_asc"
 end

@@ -1,5 +1,5 @@
-ActiveAdmin.register CauseDssTracking do
+ActiveAdmin.register UserGroupMap do
   config.filters = false
-  scope :all
+  scope :all, default: true
   actions :all, :except => [:create, :new, :edit, :update, :destroy]
 end

@@ -1,5 +1,6 @@
-ActiveAdmin.register CauseAdminsDssTracking do
+ActiveAdmin.register UserGroup do
   config.filters = false
-  scope :all
+  scope :all, default: true
   actions :all, :except => [:create, :new, :edit, :update, :destroy]
+  config.sort_order = "ID_asc"
 end

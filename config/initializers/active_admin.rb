@@ -5,7 +5,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Mssql"
+  config.site_title = "U4G Tables Overview"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -133,7 +133,7 @@ ActiveAdmin.setup do |config|
   #
   # Enable and disable Batch Actions
   #
-  config.batch_actions = true
+  config.batch_actions = false
 
 
   # == Controller Filters
