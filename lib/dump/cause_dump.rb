@@ -17,9 +17,10 @@ module Dump
     def perform!
       create_file!
 
-      Cause.find_in_batches do |causes|
+      Cause.find_in_batches(batch_size: 100) do |causes|
         dump_to_file!(causes)
       end
+      # dump_to_file!(Cause.last(1000))
     end
 
     def dump_to_file!(causes)
@@ -43,7 +44,8 @@ module Dump
         escape_str(cause.UrlName),
         escape_str(cause.Name),
         escape_str(cause.EIN),
-        cause.NteeCommonCodeID,
+        escape_str(denormalize_ntee_code(cause.NteeCommonCodeID)),
+        # cause.NteeCommonCodeID,
         escape_str(cause.Address1),
         escape_str(cause.Address2),
         escape_str(cause.Address3),
@@ -52,6 +54,7 @@ module Dump
         escape_str(cause.Zip),
         escape_str(cause.Url),
         escape_str(cause.Email),
+        CauseAdmin.where(:CauseID => cause.ID).pluck(:UserAdminID).first,
         escape_str(cause.Phone),
         escape_str(cause.ContactFirstName),
         escape_str(cause.ContactLastName),
@@ -72,6 +75,18 @@ module Dump
       data
     end
 
+    def denormalize_ntee_code(ntee_common_id)
+      if ntee_common_id
+        # code = NteeCommonCode.find(ntee_common_id)
+        # gr = NteeMajorGroup.find(code.ntee_major_group)
+        # ntee_code = "#{gr.Code}#{code.Code}"
+        # ntee_code
+        gr = NteeMajorGroup.includes(:ntee_common_codes).where('NteeCommonCodes' => {'ID' => ntee_common_id}).first
+        code = "#{gr.Code}#{gr.ntee_common_codes.first.Code}"
+        code
+      end
+    end
+
     def set_headers
       @headers = [
         "ID",
@@ -87,6 +102,7 @@ module Dump
         "Zip",
         "Url",
         "Email",
+        "CauseAdminID",
         "Phone",
         "ContactFirstName",
         "ContactLastName",
@@ -104,8 +120,6 @@ module Dump
         "ThumbnailUrl",
         "UpdatedDate",
       ]
-
-
     end
 
     def create_file!

@@ -1,3 +1,4 @@
+# ruby '2.0.0'
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.17'
@@ -20,5 +21,3 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
-ruby '2.0.0'
