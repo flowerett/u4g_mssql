@@ -13,3 +13,9 @@ Rails 3.2 App
 
 https://github.com/firmhouse/heroku-buildpack-ruby-freetds
 http://blog.firmhouse.com/connecting-to-sql-server-from-heroku-with-freetds-here-is-how-on-cedar
+
+brew update
+brew intall freetds
+
+heroku create appname --buildpack https://github.com/firmhouse/heroku-buildpack-ruby-freetds.git
+heroku config:add DATABASE_URL=sqlserver://guestreadonly@iaxjlkc5ea:aCCe$$247@iaxjlkc5ea.database.windows.net:1433/unite4good-api-db
